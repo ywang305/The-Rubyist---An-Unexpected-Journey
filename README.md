@@ -32,7 +32,7 @@ gpg --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D3
 ```
 
 
-### 2. VSCode settings
+### 2. VSCode linting and formatting
 - extension
   - Ruby ( enhance, use with other extensions )
   - Ruby on Rails ( rails snippets )
@@ -52,4 +52,11 @@ Designate formatter in settings.json
 "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop"
   }
+```
+
+### 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
+Debugging in this extension implements the ruby debug ide protocol to allow VS Code to communicate with ruby debug, it requires ruby-debug-ide to be installed on your machine. This is also how RubyMine/NetBeans implement debugging by default.
+```sh
+gem install ruby-debug-ide
+gem install debase
 ```
