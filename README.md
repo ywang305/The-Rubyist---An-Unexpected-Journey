@@ -60,3 +60,40 @@ Debugging in this extension implements the ruby debug ide protocol to allow VS C
 gem install ruby-debug-ide
 gem install debase
 ```
+
+launch.json fro rails
+```json
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Rails server",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/rails",
+      "args": ["server"]
+    }
+  ]
+}
+```
+
+launch.json for individual ruby
+```json
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Local File",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${file}"
+    }
+  ]
+}
+```
