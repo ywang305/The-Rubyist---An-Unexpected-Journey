@@ -54,6 +54,24 @@ Designate formatter in settings.json
   }
 ```
 
+
+If you are facing issue to load rubocop plugin to your VS code try the following steps to fix it.
+
+The error message will be something like:
+
+rubocop on VScode not working.Error “rubocop is not executable”
+```bash
+>> which rubocop
+=> /Users/<user>/.rvm/rubies/ruby-2.5.7/bin/rubocop
+```
+vscode workspace setting
+```json
+{
+  "ruby.rubocop.executePath": "/Users/<user>/.rvm/rubies/ruby-2.5.7/bin/"
+}
+```
+
+
 ### 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
 Debugging in this extension implements the ruby debug ide protocol to allow VS Code to communicate with ruby debug, it requires ruby-debug-ide to be installed on your machine. This is also how RubyMine/NetBeans implement debugging by default.
 ```sh
