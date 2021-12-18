@@ -1208,6 +1208,26 @@ require 'set'
   ```
 - Strings as quasi-enumerables
 
+  each_char, each_codepoint, each_line, each_byte, each_char, each_codepoint, each_line, each_byte
+
+  ```rb
+  str = "abcde"
+  str.each_byte {|b| puts b } # 97 98 99 100 101
+  str.each_char {|c| puts c } # a b c d e
+
+  str = "100\u20ac" # 100?
+  str.each_codepoint {|cp| p cp } # 49 48 48 8364
+
+  str = "This string\nhas three\nlines"
+  str.each_line {|l| puts "Next line: #{l}" }
+
+  str.bytes # arry of bytes
+  str.chars # array of chars
+  str.codepoints # array of codepoints
+  str.lines # array of lines
+
+  ```
+
 ## Part 3 Dynamics
 
 ```
