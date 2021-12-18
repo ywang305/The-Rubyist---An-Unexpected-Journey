@@ -1069,6 +1069,145 @@ require 'set'
   teens =  people.partition {|person| person.teenager? } # [[...], [...]]
   ```
 
+- first
+  ```sh
+  >> [1,2,3,4].first
+  => 1
+  >> (1..10).first
+  => 1
+  >> {1 => 2, "one two" => "three"}.first
+  => [1, 2]
+  ```
+- take , drop, take_while, drop_while
+
+  ```sh
+  >> states = %w(NJ NY CT MA VT FL NT)
+
+  >> states.take(2)
+  => ["NJ", "NY"]
+  >> states.drop(2)
+  => ["CT", "MA", "VT", "FL", "NT"]
+
+  >> states.take_while {|s| /N/.match(s) }
+  => ["NJ", "NY"]
+  >> states.drop_while {|s| /N/.match(s) }
+  => ["CT", "MA", "VT", "FL", "NT"]
+  ```
+
+- min, min_by, minmax, minmax_by
+
+  ```rb
+  %w(Ruby C APL Perl Smalltalk).min # "APL"
+  %w(Ruby C APL Perl Smalltalk).min {|a,b| a.size <=> b.size } # "C"
+  ```
+
+  A more streamlined block-based approach, though, is to use min_by or max_by, which perform the comparison implicitly:
+
+  ```rb
+  %w{ Ruby C APL Perl Smalltalk }.min_by {|lang| lang.size } # "C" No need to compare two parameters explicitly in code block
+  ```
+
+  ```rb
+  %w{ Ruby C APL Perl Smalltalk }.minmax # ["APL", "Smalltalk"]
+  %w{ Ruby C APL Perl Smalltalk }.minmax_by {|lang| lang.size } # ["C", "Smalltalk"]
+  ```
+
+  In the case of hashes, min and max use the keys to determine ordering.
+
+  ```rb
+  state_hash = {"New York" => "NY", "Maine" => "ME", "Alaska" => "AK", "Alabama" => "AL" }
+  state_hash.min # ["Alabama", "AL"]
+  state_hash.min_by {|name, abbr| name } # ["Alabama", "AL"]
+  state_hash.min_by {|name, abbr| abbr } # ["Alaska", "AK"]
+  ```
+
+- reverse_each
+  ```rb
+  [1,2,3].reverse_each {|e| puts e * 10 }
+  ```
+- each_index, each_with_index, each.with_index (better)
+
+  ```rb
+  [1,2,3].each_with_index {|e, i| puts e * 10 + i }
+  %w(a b c).each_index {|i| puts i } # 0 1 2
+
+  array = %w{ red yellow blue }
+  array.each.with_index do |color, i| # i start from 0
+    puts "#{i}: #{color}"
+  end
+  # 0: red ...
+
+  names.each.with_index(1) do |color, i| #  start from 1
+    puts "#{i}: #{color}"
+  end
+  # 1: red ...
+  ```
+
+- each_slice , each_cons
+
+  ```rb
+  [1,2,3,4,5,6,7,8,9,10].each_slice(3) {|slice| puts slice.join(",") }
+  # 1,2,3
+  # 4,5,6
+  # 7,8,9
+  # 10
+  ```
+
+  `each_cons` is similar to `each_slice`, but it takes a number of elements at a time.
+
+  ```rb
+  [1,2,3,4,5,6,7,8,9,10].each_cons(3) {|cons| puts cons.join(",") }
+  # 1,2,3
+  # 2,3,4
+  # 3,4,5
+  # 4,5,6
+  # 5,6,7
+  # 6,7,8
+  # 7,8,9
+  # 8,9,10
+  ```
+
+- slice_before, slice_after, slice_when
+
+  ```rb
+  parsed_report = ["Top Secret Report", "Eyes Only", "=====", "Title: The Meaning of Life"]
+  parsed_report.slice_before(/=/).to_a
+  # => [["Top Secret Report", "Eyes Only"],[ "=====", "Title: The Meaning of Life"]]
+
+  [1,2,3,3,4,5,6,6,7,8,8,8,9,10].slice_when { |i,j| i == j }.to_a
+  # => [[1,2,3],[3,4,5,6],[6,7,8],[8],[8,9,10]]
+  ```
+
+- cycle
+
+  cycle(1) is, in effect, another way of saying each.
+
+  ```rb
+  [1,2,3].cycle(2) {|e| puts e } # 1 2 3 1 2 3
+  ```
+
+- inject, reduce
+
+  ```rb
+  [1,2,3].inject(0) {|acc, cur| acc + cur } # 6
+  [1,2,3].reduce(0) {|acc, cur| acc + cur } # 6
+  ```
+
+  if you don't pass an initial value, the first element is used as the initial value.
+
+  In fact, the preceding example is purposefully verbose to describe how an accumulator works. We can simplify the expression:
+
+  ```rb
+  [1,2,3,4].inject(:+) # 10
+  ```
+
+- map, collect
+  ```rb
+  names.map {|name| name.upcase }
+  names.map(&:upcase)
+  ```
+- Strings as quasi-enumerables
+
 ## Part 3 Dynamics
 
 ```
