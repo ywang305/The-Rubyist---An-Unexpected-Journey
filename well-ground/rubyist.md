@@ -1225,6 +1225,87 @@ require 'set'
   str.chars # array of chars
   str.codepoints # array of codepoints
   str.lines # array of lines
+  ```
+
+- sort class spaceship operator
+
+  ```rb
+  class Painting
+    attr_reader :price
+    def initialize(price)
+      @price = price
+    end
+    def to_s
+      "My price is #{price}."
+    end
+    def <=>(other_painting) # spaceship comparator
+      self.price <=> other_painting.price
+    end
+  end
+
+  paintings = 5.times.map { Painting.new(rand(100..900)) }
+  paintings.sort # it happens immutably
+  paintings.sort! # it happens mutably
+  ```
+
+- sort block on the fly
+
+  ```rb
+  year_sort = paintings.sort do |a,b|
+    a.year <=> b.year
+  end
+
+  ["2",1,5,"3",4,"6"].sort {|a,b| a.to_i <=> b.to_i }
+
+  # 3. concise sort_by
+  ["2",1,5,"3",4,"6"].sort_by {|a| a.to_i }
+  ["2",1,5,"3",4,"6"].sort_by(&:to_i)
+  ```
+
+- sort class with comparable module
+
+  ```rb
+  class Painting
+    include Comparable # see *
+    attr_reader :price
+    def initialize(price)
+      @price = price
+    end
+    def to_s
+      "My price is #{price}."
+    end
+    def <=>(other_painting) # must def cause the include
+      self.price <=> other_painting.price
+    end
+  end
+
+  # the Comparable allows you to use > <
+  pa1 > pa2 # false
+  pa1 < pa2 # true
+  pa3 = Painting.new(300)
+  pa2.between?(pa1, pa3) # true
+
+  cheapest, priciest = [pa1, pa2, pa3].minmax
+  Painting.new(1000).clamp(cheapest, priciest).object_id == priciest.object_id
+  ```
+
+- map.with_index
+
+  map here is a enumerator, any enumerator (select, each_byte...) can followed by with_index
+
+  ```rb
+  ('a'..'z').map.with_index {|letter,i| [letter, i] }
+  # [["a", 0], ["b", 1], ...]
+  ```
+
+- lazy enumerator
+
+  `(1..Float::INFINITY).select {|n| n % 3 == 0 }.first(10)` But this line of code runs forever. The select operation never finishes, so the chained-on first command never gets executed.
+
+  ```rb
+  (1..Float::INFINITY).lazy # <Enumerator::Lazy: 1..Infinity>
+
+  (1..Float::INFINITY).lazy.select {|n| n % 3 == 0 }.first(10) # [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
 
   ```
 
