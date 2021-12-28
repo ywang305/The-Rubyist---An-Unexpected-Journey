@@ -126,3 +126,144 @@ class Symbol
   end
 end
 ```
+
+### Proc parameters and arguments
+
+> Procs differ from methods, with respect to argument handling, in that they don’t care whether they get the right number of arguments. A one-argument proc like
+
+```rb
+>> pr = Proc.new {|x| p x }
+=> #<Proc:0x000001029a8960@(irb):1>
+
+# can be called with any number of arguments, including none. If it’s called with no arguments, its single parameter gets set to nil:
+>> pr.call
+nil
+
+# If it’s called with more than one argument, the single parameter is bound to the first argument, and the remaining arguments are discarded:
+>> pr.call(1,2,3)
+1
+```
+
+## lambda
+
+> the lambda method returns a Proc object
+
+### create lambda
+
+```rb
+# lambda keyword
+lambda{ |x| p x }.call("hi")
+
+# stabby -> no param
+-> { puts "hi" }.call
+
+# stabby ->(param)
+mult = ->(x,y) { x * y }
+mult.call(3,4)
+```
+
+### lambda v.s. Proc
+
+- lambda-flavored procs don’t like being called with the wrong number of arguments. Unlike traditional procs, they’re fussy:
+
+  ```rb
+  lam = lambda {|x| p x }
+  #<Proc:0x000001029901f8@(irb):3 (lambda)>
+
+  lam.call(1) # OK
+  lam.call # ArgumentError (wrong number of arguments (given 0, expected 1))
+  lam.call(1,2,3) # ArgumentError (wrong number of arguments (given 3, expected 1))
+  ```
+
+- lambdas require explicit creation, no implicate conversion like Proc objects
+  ```rb
+  def m(&block)  # block is always a proc, never a lambda
+  ```
+- return
+  > Finally, lambdas differ from procs in how they treat the return keyword.
+  > return inside a lambda triggers an exit from the body of the lambda.
+  > return inside a proc triggers a return from the method in which the proc is being executed. Here’s an illustration of the difference:
+  ```rb
+  def return_test
+    l = lambda { return }
+    l.call # return inside lambda
+    puts "Still here!"
+    p = Proc.new { return }
+    p.call # return the method, no run below
+    puts "You won't see this message!"
+  end
+  return_test
+  ```
+
+## Concurrency
+
+### Thread.new
+
+```rb
+t = Thread.new do
+  puts "Starting the thread"
+  sleep 1
+  puts "At the end of the thread"
+end
+# note t has already run
+
+puts "Outside the thread"
+t.join
+
+=> Starting the thread
+=> Outside the thread
+=> At the end of the thread
+```
+
+## System Command
+
+### system
+
+```rb
+>> system("date")
+Sun Apr 22 08:49:11 EDT 2018
+=> true
+>> system("cat")
+I'm typing on the screen for the cat command. I'm typing on the screen for the cat command.
+=> true
+>> system('grep "D"')
+one
+two
+David
+David
+
+```
+
+> The $? variable is thread local: if you call a program in one thread, its return value affects only the $? in that thread:
+
+```rb
+>> $?
+=> #<Process::Status: pid 28046 exit 0>
+>> Thread.new { system("datee"); p $? }.join
+#<Process::Status: pid 28047 exit 127>
+=> #<Thread:0x3af840 dead>
+>> $?
+=> #<Process::Status: pid 28046 exit 0>
+```
+
+### CALLING SYSTEM PROGRAMS WITH BACKTICKS
+
+```rb
+>> d = `date`
+=> "Sun Apr 22 08:49:11 EDT 2018\n"
+>> puts d
+Sun Apr 22 08:49:11 EDT 2018
+=> nil
+>> output = `cat`
+I'm typing into cat. Since I'm using backticks,
+I won't see each line echoed back as I type it.
+Instead, cat's output is going into the
+variable output.
+=> I'm typing into cat. Since I'm using backticks,\nI won't etc.
+
+>> puts output
+I'm typing into cat. Since I'm using backticks,
+I won't see each line echoed back as I type it.
+Instead, cat's output is going into the
+variable output.
+```
