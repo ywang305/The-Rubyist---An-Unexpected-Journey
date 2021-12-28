@@ -1,7 +1,7 @@
 # The-Rubyist---An-Unexpected-Journey
 the learning path to become a rubyist
 
-### 1. [Ruby Version Manager](https://rvm.io/)
+## 1. [Ruby Version Manager](https://rvm.io/)
 To install this Ruby Version Manager please issue the following commands on your machine:
 ```bash
 gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
@@ -32,7 +32,7 @@ gpg --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D3
 ```
 
 
-### 2. VSCode linting and formatting
+## 2. VSCode linting and formatting
 - extension
   - Ruby ( enhance, use with other extensions )
   - Ruby on Rails ( rails snippets )
@@ -72,7 +72,7 @@ vscode workspace setting
 ```
 
 
-### 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
+## 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
 Debugging in this extension implements the ruby debug ide protocol to allow VS Code to communicate with ruby debug, it requires ruby-debug-ide to be installed on your machine. This is also how RubyMine/NetBeans implement debugging by default.
 ```sh
 gem install ruby-debug-ide
@@ -81,7 +81,7 @@ gem install debase
 
 
 
-launch.json for individual ruby
+### launch.json for individual ruby
 ```json
 {
   // Use IntelliSense to learn about possible attributes.
@@ -98,9 +98,7 @@ launch.json for individual ruby
   ]
 }
 ```
-launch.json for rails
-
-[more config about rails debugger](https://rahul-arora.medium.com/debugging-ruby-on-rails-server-in-vs-code-819b45113e78)
+### launch.json for rails (new project)
 ```json
 {
   // Use IntelliSense to learn about possible attributes.
@@ -114,6 +112,33 @@ launch.json for rails
       "request": "launch",
       "program": "${workspaceRoot}/bin/rails",
       "args": ["server"]
+    }
+  ]
+}
+```
+
+### launch.json for existing rails project
+    
+[more config about rails debugger](https://rahul-arora.medium.com/debugging-ruby-on-rails-server-in-vs-code-819b45113e78)
+```json
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Rails server",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/rails",
+      "args": ["server"],
+      "env": {
+        "PATH": "/Users/yaowang/.rvm/gems/ruby-2.6.8/bin:/Users/yaowang/.rvm/gems/ruby-2.6.8@global/bin:/Users/yaowang/.rvm/rubies/ruby-2.6.8/bin:/Users/yaowang/.rvm/bin:/Users/yaowang/.nvm/versions/node/v14.17.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "GEM_HOME": "/Users/yaowang/.rvm/gems/ruby-2.6.8",
+        "GEM_PATH": "/Users/yaowang/.rvm/gems/ruby-2.6.8:/Users/yaowang/.rvm/gems/ruby-2.6.8@global",
+        "RUBY_VERSION": "ruby-2.6.8"
+      }
     }
   ]
 }
