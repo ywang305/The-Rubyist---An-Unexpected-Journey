@@ -178,6 +178,8 @@ mult.call(3,4)
 - lambdas require explicit creation, no implicate conversion like Proc objects
   ```rb
   def m(&block)  # block is always a proc, never a lambda
+  
+  def m( lambda_param )   # just like common parateter
   ```
 - return
   > Finally, lambdas differ from procs in how they treat the return keyword.
