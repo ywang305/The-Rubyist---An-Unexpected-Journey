@@ -137,6 +137,13 @@ gem install debase
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "RSpec - active spec file only",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${env:GEM_HOME}/bin/rspec",
+      "args": ["-I", "${workspaceRoot}", "${file}"]
+    },
+    {
       "name": "Rails server",
       "type": "Ruby",
       "request": "launch",
