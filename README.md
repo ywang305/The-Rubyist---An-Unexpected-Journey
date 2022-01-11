@@ -69,9 +69,11 @@ vscode workspace setting
 {
   "ruby.rubocop.executePath": "/Users/yaowang/.rvm/gems/ruby-2.6.8/bin/",
   "[ruby]": {
-    "editor.defaultFormatter": "misogi.ruby-rubocop",
+    // "editor.defaultFormatter": "misogi.ruby-rubocop",
     "editor.formatOnSave": false
-  }
+  },
+  // If not specified, it assumes a null value by default.
+  "ruby.rubocop.configFilePath": ".rubocop.yml"
 }
 ```
 
