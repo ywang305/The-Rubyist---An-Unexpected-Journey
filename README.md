@@ -67,7 +67,11 @@ rubocop on VScode not working.Error “rubocop is not executable”
 vscode workspace setting
 ```json
 {
-  "ruby.rubocop.executePath": "/Users/<user>/.rvm/rubies/ruby-2.5.7/bin/"
+  "ruby.rubocop.executePath": "/Users/yaowang/.rvm/gems/ruby-2.6.8/bin/",
+  "[ruby]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop",
+    "editor.formatOnSave": false
+  }
 }
 ```
 
