@@ -77,7 +77,10 @@ vscode workspace setting
   // If not specified, it assumes a null value by default.
   "ruby.rubocop.configFilePath": ".rubocop.yml",
   "files.insertFinalNewline": true,
-  "editor.formatOnSave": false // turn off auto-foramting for all languages
+  // turn off auto-foramting for all languages
+  "editor.formatOnSave": false, 
+  // default is 4
+  "editor.tabSize": 2  
 }
 ```
 
