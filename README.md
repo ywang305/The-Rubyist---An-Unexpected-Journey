@@ -163,3 +163,10 @@ gem install debase
   ]
 }
 ```
+
+### fix if debuger hangs
+In my .env file set:
+```sh
+WEB_CONCURRENCY=0
+RAILS_MAX_THREADS=1
+```
