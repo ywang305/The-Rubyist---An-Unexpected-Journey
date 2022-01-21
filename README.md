@@ -1,4 +1,4 @@
-# The-Rubyist---An-Unexpected-Journey
+# The Rubyist: An Unexpected Journey
 the learning path to become a rubyist
 
 ## 1. [Ruby Version Manager](https://rvm.io/)
