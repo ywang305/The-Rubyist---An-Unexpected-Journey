@@ -13,4 +13,6 @@
   "editor.formatOnSave": false,
   // default is 4
   "editor.tabSize": 2
+  // anoying eslint errers go away
+  "eslint.enable": false,
 }
