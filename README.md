@@ -64,25 +64,6 @@ rubocop on VScode not working.Error “rubocop is not executable”
 >> which rubocop
 => /Users/<user>/.rvm/rubies/ruby-2.5.7/bin/rubocop
 ```
-vscode workspace setting
-```json
-{
-  // "ruby.rubocop.executePath": "/Users/yaowang/.rvm/gems/ruby-2.6.8/bin/",
-  // If not specified searches for 'rubocop' executable available on PATH (default and recommended)
-  "ruby.rubocop.executePath": "",
-  "[ruby]": {
-    // "editor.defaultFormatter": "misogi.ruby-rubocop",
-    "editor.formatOnSave": false
-  },
-  // If not specified, it assumes a null value by default.
-  "ruby.rubocop.configFilePath": ".rubocop.yml",
-  "files.insertFinalNewline": true,
-  // turn off auto-foramting for all languages
-  "editor.formatOnSave": false, 
-  // default is 4
-  "editor.tabSize": 2  
-}
-```
 
 
 ## 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
@@ -129,40 +110,8 @@ gem install debase
   ]
 }
 ```
-
-### launch.json for existing rails project
     
 [more config about rails debugger](https://rahul-arora.medium.com/debugging-ruby-on-rails-server-in-vs-code-819b45113e78)
-```json
-{
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "RSpec - active spec file only",
-      "type": "Ruby",
-      "request": "launch",
-      "program": "${env:GEM_HOME}/bin/rspec",
-      "args": ["-I", "${workspaceRoot}", "${file}"]
-    },
-    {
-      "name": "Rails server",
-      "type": "Ruby",
-      "request": "launch",
-      "program": "${workspaceRoot}/bin/rails",
-      "args": ["server"],
-      "env": {
-        "PATH": "/Users/yaowang/.rvm/gems/ruby-2.6.8/bin:/Users/yaowang/.rvm/gems/ruby-2.6.8@global/bin:/Users/yaowang/.rvm/rubies/ruby-2.6.8/bin:/Users/yaowang/.rvm/bin:/Users/yaowang/.nvm/versions/node/v14.17.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
-        "GEM_HOME": "/Users/yaowang/.rvm/gems/ruby-2.6.8",
-        "GEM_PATH": "/Users/yaowang/.rvm/gems/ruby-2.6.8:/Users/yaowang/.rvm/gems/ruby-2.6.8@global",
-        "RUBY_VERSION": "ruby-2.6.8"
-      }
-    }
-  ]
-}
-```
 
 ### fix if debuger hangs
 In my .env file set:
@@ -170,3 +119,7 @@ In my .env file set:
 WEB_CONCURRENCY=0
 RAILS_MAX_THREADS=1
 ```
+
+4.## Example VSCode for ICN project
+- [launch.json](vscode_config/launch.json)
+- [settings.json](vscode_config/settings.json)
