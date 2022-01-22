@@ -12,6 +12,13 @@
       "args": ["-I", "${workspaceRoot}", "${file}"]
     },
     {
+      "name": "Cucumber - active spec file only",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${env:GEM_HOME}/bin/cucumber",
+      "args": ["${file}"]
+    },
+    {
       "name": "Rails server",
       "type": "Ruby",
       "request": "launch",
