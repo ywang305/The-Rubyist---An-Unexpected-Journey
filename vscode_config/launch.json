@@ -30,6 +30,15 @@
         "GEM_PATH": "/Users/yaowang/.rvm/gems/ruby-2.6.8:/Users/yaowang/.rvm/gems/ruby-2.6.8@global",
         "RUBY_VERSION": "ruby-2.6.8"
       }
+    },
+    {
+      "name": "Jest - active spec file only",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/.bin/jest",
+      "args": ["--verbose", "-i", "--no-cache", "--testPathPattern", "${file}"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
