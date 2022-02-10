@@ -4,7 +4,7 @@
   "ruby.rubocop.executePath": "",
   "[ruby]": {
     // "editor.defaultFormatter": "misogi.ruby-rubocop",
-    "editor.formatOnSave": false
+    // "editor.formatOnSave": false
   },
   // If not specified, it assumes a null value by default.
   "ruby.rubocop.configFilePath": ".rubocop.yml",
@@ -12,7 +12,16 @@
   // turn off auto-foramting for all languages
   "editor.formatOnSave": false,
   // default is 4
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
   // anoying eslint errers go away
-  "eslint.enable": false,
+  "eslint.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "prettier.requireConfig": true,
+  "eslint.format.enable": true,
 }
