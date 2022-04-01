@@ -33,6 +33,7 @@ gpg --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D3
 
 
 ## 2. VSCode linting and formatting
+### config
 - extension
   - Ruby ( enhance, use with other extensions )
   - Ruby on Rails ( rails snippets )
@@ -54,17 +55,11 @@ Designate formatter in settings.json
   }
 ```
 
-
-If you are facing issue to load rubocop plugin to your VS code try the following steps to fix it.
-
-The error message will be something like:
-
-rubocop on VScode not working.Error “rubocop is not executable”
-```bash
->> which rubocop
-=> /Users/<user>/.rvm/rubies/ruby-2.5.7/bin/rubocop
+### rubocop errors
+rubocop on VScode not working.Error “rubocop is not executable”, or somthing empty, it means vscode couldn't find rubocop path. [solution](https://www.lynnbright.com/vs-code-rubocop-ruby_executable_hooks-no-such-file-or-directory/)
+```sh
+"ruby.rubocop.executePath": "/Users/yaowang/.rvm/gems/ruby-2.6.8/wrappers/",
 ```
-
 
 ## 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
 Debugging in this extension implements the ruby debug ide protocol to allow VS Code to communicate with ruby debug, it requires ruby-debug-ide to be installed on your machine. This is also how RubyMine/NetBeans implement debugging by default.
