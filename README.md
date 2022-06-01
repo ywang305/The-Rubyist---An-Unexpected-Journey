@@ -118,3 +118,28 @@ RAILS_MAX_THREADS=1
 4.## Example VSCode for ICN project
 - [launch.json](vscode_config/launch.json)
 - [settings.json](vscode_config/settings.json)
+
+## 3. RuboCop (VS Code) from [conflucne](https://icapitalnetwork.atlassian.net/wiki/spaces/IR/pages/2531131477/RuboCop+VS+Code)
+Make sure gems are installed under vendor/bundle. You can set that up using a bundle config command followed by the bundle install command. This is the preferred way of installing the project gems.
+
+All bundle related command (like rails, rake, sidekiq…) from here onwards must be prepended with the bundle exec prefix otherwise they’ll point to a gem outside our vendor folder which might have a wrong version for example.
+
+```sh
+bundle config --local path 'vendor/bundle'
+bundle install
+```
+Then, on VS Code do CMD + Shift + P and type “Open Settings (JSON)“. Make sure you have both extensions - ruby and ruby-rubocop - installed and paste the following configs in there. Remember to replace <user_name> with your user.
+
+> **Warning**
+> The RuboCop command below is for rbenv. If you use rvm it may look a little different. You may be able to locate it by doing which rubocop. Also note that if you have additional ruby/rubocop configs they may be interfering with these.
+```sh
+"ruby.rubocop.suppressRubocopWarnings": true,
+"ruby.useLanguageServer": true,
+"ruby.lint": {
+    "rubocop": {
+        "command": "/Users/yaowang/.rvm/gems/ruby-2.6.8/bin/rubocop" # here already changed to rvm
+    }
+},
+```
+> **Note**
+> All done
