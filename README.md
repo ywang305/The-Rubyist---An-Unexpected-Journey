@@ -96,16 +96,28 @@ gem install debase
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Rails server",
+      "name": "Rails Debug",
       "type": "Ruby",
       "request": "launch",
       "program": "${workspaceRoot}/bin/rails",
       "args": ["server"]
+      "env": {
+        "PATH": "/Users/yaowang/.rvm/gems/ruby-2.7.6/bin:/Users/yaowang/.rvm/gems/ruby-2.7.6@global/bin:/Users/yaowang/.rvm/rubies/ruby-2.7.6/bin:/Users/yaowang/.rvm/bin:/Users/yaowang/.nvm/versions/node/v16.15.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/yaowang/.nvm/versions/node/v16.15.0/bin:/Users/yaowang/.cargo/bin",
+        "GEM_HOME": "/Users/yaowang/.rvm/gems/ruby-2.7.6",
+        "GEM_PATH": "/Users/yaowang/.rvm/gems/ruby-2.7.6:/Users/yaowang/.rvm/gems/ruby-2.7.6@global",
+        "RUBY_VERSION": "ruby-2.7.6"
+      }
     }
   ]
 }
 ```
-    
+> **Note**
+> "env" can be gotten from this script : `printf "\n\"env\": {\n  \"PATH\": \"$PATH\",\n  \"GEM_HOME\": \"$GEM_HOME\",\n  \"GEM_PATH\": \"$GEM_PATH\",\n  \"RUBY_VERSION\": \"$RUBY_VERSION\"\n}\n\n"`
+
+> **Warning**
+> if a new version of ruby is installed, need update the env, `gem install rdebug-ide` (if missing), `gem install rake` ( if version conflicts)
+
+
 [more config about rails debugger](https://rahul-arora.medium.com/debugging-ruby-on-rails-server-in-vs-code-819b45113e78)
 
 ### fix if debuger hangs
@@ -143,3 +155,4 @@ Then, on VS Code do CMD + Shift + P and type “Open Settings (JSON)“. Make su
 ```
 > **Note**
 > All done
+
