@@ -61,7 +61,7 @@ rubocop on VScode not working.Error “rubocop is not executable”, or somthing
 "ruby.rubocop.executePath": "/Users/yaowang/.rvm/gems/ruby-2.6.8/wrappers/",
 ```
 
-## 3. [vscode-ruby-debugger](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
+## 3. [vscode-ruby-debug-ide](https://github.com/rubyide/vscode-ruby/blob/main/docs/debugger.md)
 Debugging in this extension implements the ruby debug ide protocol to allow VS Code to communicate with ruby debug, it requires ruby-debug-ide to be installed on your machine. This is also how RubyMine/NetBeans implement debugging by default.
 ```sh
 gem install ruby-debug-ide
@@ -126,12 +126,35 @@ In my .env file set:
 WEB_CONCURRENCY=0
 RAILS_MAX_THREADS=1
 ```
+## 4. Ruby Debug ( ruby 3 )
+new for ruby 3, and default in Rails7
+```
+gem "debug", ">= 1.0.0".   # https://github.com/ruby/debug
 
-4.## Example VSCode for ICN project
+{
+  "type": "rdbg",
+  "name": "Rails Server",
+  "request": "launch",
+  "command": "bin/rails",
+  "script": "s",
+  "rdbgPath": "bundle exec rdbg",
+  "useBundler": true,
+  "useTerminal": true,
+  "env": {
+    "WEB_CONCURRENCY": 0,
+    "RAILS_MAX_THREADS": 1
+  }
+},
+```
+ref 
+- https://zenn.dev/igaiga/books/rails-practice-note/viewer/ruby_rails_vscode
+- https://github.com/ruby/debug
+
+## 5. Example VSCode for ICN project
 - [launch.json](vscode_config/launch.json)
 - [settings.json](vscode_config/settings.json)
 
-## 3. RuboCop (VS Code) from [conflucne](https://icapitalnetwork.atlassian.net/wiki/spaces/IR/pages/2531131477/RuboCop+VS+Code)
+## 6. RuboCop (VS Code) from [conflucne](https://icapitalnetwork.atlassian.net/wiki/spaces/IR/pages/2531131477/RuboCop+VS+Code)
 Make sure gems are installed under vendor/bundle. You can set that up using a bundle config command followed by the bundle install command. This is the preferred way of installing the project gems.
 
 All bundle related command (like rails, rake, sidekiq…) from here onwards must be prepended with the bundle exec prefix otherwise they’ll point to a gem outside our vendor folder which might have a wrong version for example.
