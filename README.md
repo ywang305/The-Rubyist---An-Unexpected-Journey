@@ -32,28 +32,39 @@ gpg --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D3
 ```
 
 
-## 2. VSCode linting and formatting
-### config
-- extension
-  - Ruby ( enhance, use with other extensions )
-  - Ruby on Rails ( rails snippets )
-  - VSCode Ruby ( auto added ? )
-  - ruby-rubocop ( linting, formating on save )
-
-[install Rubocop For Code Formatting](https://deanin.com/blog/configure-visual-studio-code-for-ruby-on-rails-6-with-this-quick-guide/)
-
-```sh
-rvm @global do gem install rubocop # only for ruby-in-use version
-```
- - note this is installed per rvm ruby version, if you use another version of ruby, execute install again 
- - possibly there are anoying warnings, avoid by checking "Ruby › Rubocop: Suppress Rubocop Warnings" in the VSCode settings.
-
-Designate formatter in settings.json
+## 2. VSCode settings
 ```json
-"[ruby]": {
-    "editor.defaultFormatter": "misogi.ruby-rubocop"
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/public/assets": true
+  },
+  "editor.scrollBeyondLastLine": false,
+  "editor.tabSize": 2,
+  "editor.suggestSelection": "first",
+  "editor.largeFileOptimizations": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "extensions.ignoreRecommendations": true,
+  "terminal.integrated.scrollback": 2000,
+  "security.workspace.trust.untrustedFiles": "open",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "yard.spacers.afterDescription": false,
+  "yard.spacers.afterTags": false,
+  "yard.spacers.beforeDescription": false,
+  "yard.spacers.beforeTags": false,
+  "yard.spacers.separateTags": false,
+  "ruby.rubocop.executePath": "/Users/ydwang/.asdf/shims/",
+  "editor.formatOnSave": false,
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.semanticHighlighting.enabled": true
   }
+}
+
 ```
+
 
 ### rubocop errors
 rubocop on VScode not working.Error “rubocop is not executable”, or somthing empty, it means vscode couldn't find rubocop path. [solution](https://www.lynnbright.com/vs-code-rubocop-ruby_executable_hooks-no-such-file-or-directory/)
